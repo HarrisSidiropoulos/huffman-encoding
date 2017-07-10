@@ -6,7 +6,7 @@ describe('Huffman Encoding', () => {
   let s = '';
   let fs = [];
   let bits = '';
-  describe('Encode aaaab string', () => {
+  describe('Encode aaaabcc string', () => {
     beforeEach(() => {
       s = 'aaaabcc';
       fs = frequencies(s);
@@ -55,6 +55,22 @@ describe('Huffman Encoding', () => {
       expect(bits.length).to.be.eql(10);
     });
     it('should decoded string be hallo', () => {
+      expect(decode(fs, bits)).to.be.eql(s);
+    });
+  });
+  describe('Encode string "My Name is John"', () => {
+    beforeEach(() => {
+      s = 'My Name is John';
+      fs = frequencies(s);
+      bits = encode(fs, s);
+    });
+    it('should encoded string value to be 1111001111011100100101010111001111000110011010010010000', () => {
+      expect(bits).to.be.eql('1111001111011100100101010111001111000110011010010010000');
+    });
+    it('should encoded string length be 10', () => {
+      expect(bits.length).to.be.eql(55);
+    });
+    it('should decoded string be "My Name is John"', () => {
       expect(decode(fs, bits)).to.be.eql(s);
     });
   });
